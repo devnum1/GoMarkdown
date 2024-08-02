@@ -63,6 +63,13 @@ func SlackMarkdownToGeneral(slackMarkdown string) string {
 	return markdown
 }
 
+func MarkdownToHtmlMark(generalMarkdown string) string {
+	markdown := tildeToDoubleReplacement.ReplaceAllString(generalMarkdown, "$1~~")
+	markdown = strings.ReplaceAll(markdown, "\n", "\n\n") // double enter will render as <p> in html
+
+	return markdown
+}
+
 func splitSentence(input string) []string {
 	pattern := regexp.MustCompile(`(\*.*?\*|_.*?_|~.*?~|` + "`" + `.*?` + "`" + `|<.*?>|\s+|\b)`)
 	matches := pattern.FindAllString(input, -1)
