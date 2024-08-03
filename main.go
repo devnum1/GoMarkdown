@@ -94,6 +94,18 @@ func splitSentence(input string) []string {
 	return result
 }
 
+// just add function, not used
+func splitInput(input string) string {
+	var splitedText []string
+
+	catchIndex := 0
+	for i, s := range input {
+		if strings.Contains("*_~`<", string(s)) {
+			catchIndex = i
+		}
+	}
+}
+
 func main() {
 	input := "This is *complex* <https://github.com|style> for _~*my slack*~_ `message`"
 	split := splitSentence(input)
