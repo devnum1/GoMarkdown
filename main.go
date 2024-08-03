@@ -94,16 +94,25 @@ func splitSentence(input string) []string {
 	return result
 }
 
-// just add function, not used
-func splitInput(input string) string {
+func splitInput(input string) []string {
 	var splitedText []string
-
 	catchIndex := 0
+
 	for i, s := range input {
-		if strings.Contains("*_~`<", string(s)) {
-			catchIndex = i
+		if strings.ContainsRune("*_~`<", s) {
+			if catchIndex < i {
+				splitedText = append(splitedText, input[catchIndex:i])
+			}
+			splitedText = append(splitedText, string(s))
+			catchIndex = i + 1
 		}
 	}
+
+	if catchIndex < len(input) {
+		splitedText = append(splitedText, input[catchIndex:])
+	}
+
+	return splitedText
 }
 
 func main() {
